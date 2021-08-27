@@ -28,14 +28,10 @@ public class UserController {
      * @param page 基本分页条件
      * @return 分页结果
      */
-    @GetMapping(produces = "application/json")
+    @PostMapping(produces = "application/json")
     @PreAuthorize("hasAuthority('user:get')")
     @ApiOperation(value = "【分页查询】", notes = "用户分页查询")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name="current", value="页码（默认第1页）", dataType = "int", example = "1", paramType="body"),
-            @ApiImplicitParam(name="size", value="每页条数（默认每页10条）", dataType = "int", example = "10", paramType="body")
-    })
-    public IPage<User> get(@ApiIgnore @RequestBody BasePage<User> page)
+    public IPage<User> get(@RequestBody BasePage<User> page)
     {
         return userService.find(page);
     }

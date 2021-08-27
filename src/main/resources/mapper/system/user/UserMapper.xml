@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wang.demo.modules.system.user.mapper.UserMapper">
         <select id="selectById" parameterType="int" resultType="com.wang.demo.modules.system.user.entity.User">
-            select id,nick,name,revision,creted_by,creted_time,updated_by,updated_time,
+            select id,nick,name,revision,created_by,created_time,updated_by,updated_time
             from user where id = #{id}
         </select>
     

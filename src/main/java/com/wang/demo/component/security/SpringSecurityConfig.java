@@ -110,10 +110,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
         //开放登录接口
         .antMatchers(HttpMethod.POST,"/system/login").permitAll()
-        //Swagger index页面： https://localhost:8008/swagger-ui/index.html swagger未完善 请使用postman
+        //Swagger index页面： https://localhost:8008/swagger-ui/index.html
         .antMatchers("/swagger-ui/**").permitAll()
         .antMatchers("/swagger-resources/**").permitAll()
-        .antMatchers("/v2/api-docs").permitAll()
+        .antMatchers("/v3/api-docs").permitAll()
          //除了上面的接口不需要验证 剩余的接口都需要验证token
         .anyRequest().authenticated();
                 /*
