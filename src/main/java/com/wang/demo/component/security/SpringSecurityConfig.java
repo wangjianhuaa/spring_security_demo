@@ -3,7 +3,6 @@ package com.wang.demo.component.security;
 import com.wang.demo.base.response.ResultCode;
 import com.wang.demo.base.response.ResultMessage;
 import com.wang.demo.component.redis.RedisComponent;
-import com.wang.demo.component.security.filter.JwtAuthenticationFilter;
 import com.wang.demo.component.security.filter.JwtAuthorizationFilter;
 import com.wang.demo.component.security.jwt.JsonWebToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +10,18 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
 /**
@@ -87,13 +86,25 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
+     * 解决跨域请求问题。
+     */
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration corsConfiguration = new CorsConfiguration();
+        corsConfiguration.applyPermitDefaultValues();
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", corsConfiguration);
+        return source;
+    }
+
+    /**
      * 请求认证配置
      * @param http http安全
      * @throws Exception 异常
      */
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.cors();
+        http.cors().configurationSource(corsConfigurationSource());
         /*
          * 关闭跨站点请求伪造(csrf)
          */
@@ -114,6 +125,9 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/swagger-ui/**").permitAll()
         .antMatchers("/swagger-resources/**").permitAll()
         .antMatchers("/v3/api-docs").permitAll()
+        .antMatchers("/doc.html").permitAll()
+        .antMatchers("/webjars/**").permitAll()
+        .antMatchers("/favicon.ico").permitAll()
          //除了上面的接口不需要验证 剩余的接口都需要验证token
         .anyRequest().authenticated();
                 /*

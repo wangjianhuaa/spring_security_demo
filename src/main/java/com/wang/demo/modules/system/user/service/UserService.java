@@ -11,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-
 import java.util.List;
 
 /**
@@ -113,4 +112,6 @@ public class UserService extends ServiceImpl<UserMapper, User> {
     public List<String> findAuthorityCodeByUserId(int id){
         return baseMapper.findAuthorityCodeByUserId(id);
     }
+
+
 }

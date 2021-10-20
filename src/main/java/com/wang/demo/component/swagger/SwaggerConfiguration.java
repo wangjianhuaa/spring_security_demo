@@ -1,9 +1,9 @@
 package com.wang.demo.component.swagger;
 
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import springfox.documentation.annotations.ApiIgnore;
 import springfox.documentation.builders.*;
 import springfox.documentation.oas.annotations.EnableOpenApi;
 import springfox.documentation.service.*;
@@ -11,17 +11,10 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.ApiSelectorBuilder;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger.web.SecurityConfiguration;
-import springfox.documentation.swagger.web.SecurityConfigurationBuilder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Predicate;
-
-import static springfox.documentation.builders.PathSelectors.ant;
-import static springfox.documentation.builders.PathSelectors.regex;
 
 
 /**
@@ -33,11 +26,16 @@ import static springfox.documentation.builders.PathSelectors.regex;
 @EnableOpenApi
 public class SwaggerConfiguration {
 
+
+    @Value("${knife4j.enable}")
+    private boolean enable;
+
     @Bean
     public Docket createRestApi(){
         //jwt配置 3.0  升级为 securitySchemes() 和securityContexts()的配置形式
         //DocumentationType 设置为OAS_30 security需要放开权限为v3而不是以前版本的v2
         Docket docket = new Docket(DocumentationType.OAS_30);
+        docket.enable(enable);
         docket.apiInfo(apiInfo());
         ApiSelectorBuilder selectorBuilder =  docket.select();
         selectorBuilder.

@@ -80,7 +80,7 @@ public class LoginController {
         return ResultMessage.success(ResultCode.SUCCESS,map);
     }
 
-    @GetMapping("info")
+    @GetMapping("user/info")
     public ResultMessage getInfo(HttpServletRequest request,HttpServletResponse response){
 //        Authentication authentication = jsonWebToken.getAuthenticationFromToken(request, response);
 //        List<GrantedAuthority> roles = (List<GrantedAuthority>) authentication.getAuthorities();

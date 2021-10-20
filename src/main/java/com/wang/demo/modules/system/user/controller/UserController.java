@@ -1,7 +1,6 @@
 package com.wang.demo.modules.system.user.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wang.demo.base.entity.BasePage;
 import com.wang.demo.modules.system.user.entity.User;
 import com.wang.demo.modules.system.user.service.UserService;
@@ -28,6 +27,7 @@ public class UserController {
      * @param page 基本分页条件
      * @return 分页结果
      */
+//    @ApiOperationSupport(author = "wangjianhua")
     @PostMapping(produces = "application/json")
     @PreAuthorize("hasAuthority('user:get')")
     @ApiOperation(value = "【分页查询】", notes = "用户分页查询")

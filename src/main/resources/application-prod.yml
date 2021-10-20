@@ -7,12 +7,17 @@ spring:
     username: root
     password: 123456
     type: com.zaxxer.hikari.HikariDataSource
-    #redis连接
+#    hikaricp连接池 改变最大连接时间
+    hikari:
+      max-lifetime: 30000
+      #redis连接
   redis:
     host: 47.96.98.214
     port: 6379
     timeout: 30000
-#  base64加密解密需要账户名密码 此处不能省略
+    password: 123456789
+    database: 1
+  #  base64加密解密需要账户名密码 此处不能省略
   security:
     #  jwt动态配置
     jwt:
@@ -46,7 +51,5 @@ xss:
   excludes:
   # 匹配链接
   urlPatterns: /*
-
-
-
-
+knife4j:
+  enable: false
