@@ -93,7 +93,7 @@ public class UserService extends ServiceImpl<UserMapper, User> {
      * @return 主键
      */
     public int findIdByUserName(String username){
-        return baseMapper.findIdByUserName(username);
+        return baseMapper.findIdByUserName(username,"user");
     }
 
     /**

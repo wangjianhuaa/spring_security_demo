@@ -56,6 +56,12 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+
+    public static void main(String[] args) {
+        System.out.println(new BCryptPasswordEncoder().encode("123456"));
+
+    }
+
     /**
      * 自定义处理提供器并加载到ioc中 提供器暂不使用 可以注入authenticationManagerBean();
      * @return DaoAuthenticationProvider
@@ -142,7 +148,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                     String username = authentication.getName();
                     System.err.println("当前操作人:"+username);
                     redisComponent.del(username);
-                    ResultMessage.response(response,ResultMessage.success(ResultCode.USER_LOGOUT_SUCCESS));
+                    ResultMessage.response(response,ResultMessage.success(ResultCode.USER_LOGOUT_SUCCESS,""));
                 });
                 /*
                  * Spring Security配置过滤器

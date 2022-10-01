@@ -11,7 +11,7 @@
             select id,nick,name,pass,state from user where name = #{name}
     </select>
     <select id="findIdByUserName" parameterType="string" resultType="int">
-        select id from user where name = #{name}
+        select id from ${table} where name = #{name}
     </select>
     
     <select id="findUserRolesByUserId" resultType="string" parameterType="int">

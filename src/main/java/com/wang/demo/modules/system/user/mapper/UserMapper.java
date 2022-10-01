@@ -17,7 +17,7 @@ public interface UserMapper extends BaseMapper<User> {
      * @param username 用户名
      * @return id
      */
-    int findIdByUserName(String username);
+    int findIdByUserName(String name,String table);
 
     /**
      * 根据用户名获得用户信息

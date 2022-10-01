@@ -46,7 +46,5 @@ xss:
   excludes:
   # 匹配链接
   urlPatterns: /*
-
-
-
-
+knife4j:
+  enable: false

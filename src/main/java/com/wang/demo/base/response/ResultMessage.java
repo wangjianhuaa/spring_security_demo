@@ -79,7 +79,7 @@ public class ResultMessage {
             e.printStackTrace();
         }
         response.setContentType("application/json;charset=utf-8");
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        response.setStatus(HttpServletResponse.SC_OK);
         PrintWriter out = null;
         try{
             out = response.getWriter();

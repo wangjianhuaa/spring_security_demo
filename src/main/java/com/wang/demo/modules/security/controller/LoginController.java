@@ -40,7 +40,7 @@ public class LoginController {
     private JsonWebToken jsonWebToken;
 
     @PostMapping("login")
-    public ResultMessage login(@RequestBody User user){
+    public ResultMessage login(@RequestBody(required = false) User user){
         String name = user.getName();
         String pass = user.getPass();
         if(StringUtils.isEmpty(name) || StringUtils.isEmpty(pass)){
@@ -51,7 +51,7 @@ public class LoginController {
         //异常处理也可以在继承userdetailsService的类中自定义
         // 前提是有一个继承了userdetails的实体类
         try{
-          map  = tokenService.generateToken(name, pass, "1");
+          map  = tokenService.generateToken(name, pass, "0");
         }catch (Exception exception){
             //处理返回认证失败提示信息到客户端
             if(exception instanceof UsernameNotFoundException){
