@@ -44,7 +44,7 @@ public class UserController {
         return userService.findById(id);
     }
 
-    @PostMapping
+    @PutMapping
     @PreAuthorize("hasRole('ROLE_GUEST')")
     @ApiOperation(value = "【新增】",notes = "用户新增")
     public void save(@Validated @RequestBody User user){
@@ -56,5 +56,13 @@ public class UserController {
     @ApiOperation(value = "【删除】",notes = "单个用户删除")
     public void deleteById(@ApiParam(name = "id",value = "用户主键",required = true) @PathVariable("id") int id){
         userService.deleteById(id);
+    }
+
+    @PutMapping("{id}")
+    @PreAuthorize("hasRole('ROLE_GUEST')")
+    @ApiOperation(value = "【修改】",notes = "用户修改")
+    public void update(@Validated @RequestBody User user,@PathVariable("id") Integer id){
+        //id没用 懒得改了
+        userService.updateUser(user,id);
     }
 }

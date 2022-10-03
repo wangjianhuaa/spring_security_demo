@@ -1,12 +1,14 @@
 package com.wang.demo.modules.system.user.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wang.demo.base.entity.BasePage;
 import com.wang.demo.modules.system.user.entity.User;
 import com.wang.demo.modules.system.user.mapper.UserMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,7 +59,17 @@ public class UserService extends ServiceImpl<UserMapper, User> {
             密码强加密 否则密码无法通过过滤器
          */
         entity.setPass(new BCryptPasswordEncoder().encode(entity.getPass()));
+        entity.setState(0);
         return baseMapper.insert(entity);
+    }
+    @Transactional(readOnly = false)
+    public void updateUser(User entity,Integer id){
+        //取消使用updateWrapper 稍后完善
+//        UpdateWrapper<User> updateWrapper = new UpdateWrapper<>();
+//        if(StringUtils.hasText(entity.getName())){
+//            updateWrapper.eq("name",)
+//        }
+         baseMapper.updateUserById(entity);
     }
 
     /**

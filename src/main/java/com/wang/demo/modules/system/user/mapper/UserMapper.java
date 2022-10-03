@@ -47,4 +47,10 @@ public interface UserMapper extends BaseMapper<User> {
      * @return 结果
      */
     List<User> selectListByPage(int start,int end);
+
+    /**
+     * 定制接口 修改名字和昵称 暂时不支持修改密码
+     * @param user user
+     */
+    void updateUserById(User user);
 }

@@ -6,6 +6,10 @@
             select id,nick,name,revision,created_by,created_time,updated_by,updated_time
             from user where id = #{id}
         </select>
+
+    <update id="updateUserById">
+        update user set name = #{name} ,nick = #{nick} where id = #{id}
+    </update>
     
     <select id="findUserByUserName" parameterType="string" resultType="user">
             select id,nick,name,pass,state from user where name = #{name}

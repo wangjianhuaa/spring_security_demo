@@ -58,6 +58,7 @@ public class User extends Base {
         return name;
     }
 
+    @JsonProperty(value = "username")
     public void setName(String name) {
         this.name = name;
     }
