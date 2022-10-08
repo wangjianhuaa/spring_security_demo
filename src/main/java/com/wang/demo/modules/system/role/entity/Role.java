@@ -2,6 +2,7 @@ package com.wang.demo.modules.system.role.entity;
 
 import com.wang.demo.base.entity.Base;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,10 +11,12 @@ import lombok.Setter;
  * @author wangjianhua
  * @date 2021-03-24 13:55
  */
-@Getter
-@Setter
+@Data
 public class Role extends Base {
 
-    @ApiModelProperty(value = "用户名称",dataType = "string")
+    @ApiModelProperty(value = "角色名称",dataType = "string")
     private String name;
+
+    @ApiModelProperty(value = "角色码 后台授权使用",dataType = "string")
+    private String code;
 }

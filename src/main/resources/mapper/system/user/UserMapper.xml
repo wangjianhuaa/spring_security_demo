@@ -19,7 +19,7 @@
     </select>
     
     <select id="findUserRolesByUserId" resultType="string" parameterType="int">
-            select distinct r.name from user_role ur,role r where ur.role_id = r.id and ur.user_id= #{id}
+            select distinct r.code from user_role ur,role r where ur.role_id = r.id and ur.user_id= #{id}
     </select>
     
     <select id="findAuthorityCodeByUserId" parameterType="int" resultType="string">

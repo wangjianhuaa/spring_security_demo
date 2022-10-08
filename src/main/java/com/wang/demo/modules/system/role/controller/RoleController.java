@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
  * @date 2021-03-24 14:10
  */
 @RestController
-@RequestMapping("role")
+@RequestMapping("system/role")
 @Api(tags = "【系统管理】【角色管理】")
 public class RoleController {
     @Autowired
     private RoleService roleService;
 
-    @GetMapping
+    @PostMapping("list")
     @ApiOperation(value = "分页查询",notes = "角色分页查询")
     @ApiImplicitParams({
             @ApiImplicitParam(name="current", value="页码（默认第1页）", dataType = "int", example = "1", paramType="body"),

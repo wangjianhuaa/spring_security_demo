@@ -9,6 +9,7 @@ import com.wang.demo.base.entity.BasePage;
 import com.wang.demo.modules.system.user.entity.User;
 import com.wang.demo.modules.system.user.mapper.UserMapper;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -48,6 +49,9 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 
     }
 
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
     /**
      * 用户新增
      * @param entity 用户实体类
@@ -58,7 +62,12 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         /*
             密码强加密 否则密码无法通过过滤器
          */
-        entity.setPass(new BCryptPasswordEncoder().encode(entity.getPass()));
+        if(StringUtils.hasText(entity.getPass())){
+            entity.setPass(bCryptPasswordEncoder.encode(entity.getPass()));
+
+        }else {
+            entity.setPass(bCryptPasswordEncoder.encode("123456"));
+        }
         entity.setState(0);
         return baseMapper.insert(entity);
     }
