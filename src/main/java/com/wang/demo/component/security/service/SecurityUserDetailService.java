@@ -45,7 +45,7 @@ public class SecurityUserDetailService implements UserDetailsService {
         List<GrantedAuthority> authorities = new ArrayList<>();
         //角色
         userService.findUserRolesByUserId(user.getId()).forEach(roles ->{
-            authorities.add(new SimpleGrantedAuthority(roles));
+            authorities.add(new SimpleGrantedAuthority("ROLE_"+roles));
         });
         //权限
         userService.findAuthorityCodeByUserId(user.getId()).forEach(authority ->{

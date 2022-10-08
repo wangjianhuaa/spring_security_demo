@@ -45,7 +45,8 @@ INSERT INTO `authority` VALUES (2, '获取用户列表', 'user:get', NULL, NULL,
 DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
-  `name` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色名称',
+  `code` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色码',
+  `name` varchar(15)   NULL DEFAULT NULL COMMENT '角色名称',
   `revision` int(11) NULL DEFAULT NULL COMMENT '乐观锁',
   `created_by` int(11) NULL DEFAULT NULL COMMENT '创建人',
   `created_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
@@ -57,8 +58,8 @@ CREATE TABLE `role`  (
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES (1, 'ROLE_GUEST', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `role` VALUES (2, 'ROLE_ADMIN', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `role` VALUES (1, 'ROLE_GUEST','访客', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `role` VALUES (2, 'ROLE_ADMIN','管理员', NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for role_authority
@@ -68,9 +69,9 @@ CREATE TABLE `role_authority`  (
   `role_id` int(11) NOT NULL COMMENT '角色外键',
   `authority_id` int(11) NOT NULL COMMENT '权限外键',
   `revision` int(11) NULL DEFAULT NULL COMMENT '乐观锁',
-  `created_by` int(11) NULL DEFAULT NULL COMMENT '创建人',
+  `created_by` varchar(11) NULL DEFAULT NULL COMMENT '创建人',
   `created_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_by` int(11) NULL DEFAULT NULL COMMENT '更新人',
+  `updated_by` varchar(11) NULL DEFAULT NULL COMMENT '更新人',
   `updated_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间'
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色权限表' ROW_FORMAT = Dynamic;
 

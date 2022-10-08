@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.wang.demo.base.entity.BasePage;
 import com.wang.demo.modules.system.role.entity.Role;
 import com.wang.demo.modules.system.role.mapper.RoleMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -29,6 +31,11 @@ public class RoleService extends ServiceImpl<RoleMapper, Role> {
         return baseMapper.insert(role);
     }
 
+    @Transactional(readOnly = false)
+    public int updateRole(Role role){
+        return baseMapper.updateById(role);
+    }
+
     /**
      * role角色获取
      * @param id 主键
@@ -43,10 +50,21 @@ public class RoleService extends ServiceImpl<RoleMapper, Role> {
      * @param page 分页参数
      * @return 分页
      */
-    public IPage<Role> findByPage(Page<Role> page){
+    public IPage<Role> findByPage(BasePage<Role> page){
         QueryWrapper<Role> wrapper = new QueryWrapper<>();
-//        wrapper.like("name","");
-        return baseMapper.selectPage(page,wrapper);
+        if(StringUtils.hasText(page.getEntity().getName())){
+            wrapper.like("name",page.getEntity().getName());
+        }
+        return baseMapper.selectPage(page.getPage(),wrapper);
+    }
+
+    /**
+     * 删除角色
+     * @param id
+     */
+    @Transactional(readOnly = false)
+    public void deleteById(int id){
+        baseMapper.deleteById(id);
     }
 
     }

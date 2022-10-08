@@ -10,8 +10,6 @@ spring:
     #redis连接
     schema: classpath:/db/spring_security_demo.sql
     # 第一次启动放开注释 建表后即可删除
-    initialization-mode: always
-    # 第一次启动放开注释 建表后即可删除
 #    initialization-mode: always
   redis:
     host: localhost

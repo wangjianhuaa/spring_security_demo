@@ -2,10 +2,12 @@ package com.wang.demo.modules.system.role.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.wang.demo.base.entity.BasePage;
 import com.wang.demo.modules.system.role.entity.Role;
 import com.wang.demo.modules.system.role.service.RoleService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -25,7 +27,7 @@ public class RoleController {
             @ApiImplicitParam(name="current", value="页码（默认第1页）", dataType = "int", example = "1", paramType="body"),
             @ApiImplicitParam(name="size", value="每页条数（默认每页10条）", dataType = "int", example = "10", paramType="body")
     })
-    public IPage<Role> get(@RequestBody Page<Role> page){
+    public IPage<Role> get(@RequestBody BasePage<Role> page){
         return roleService.findByPage(page);
     }
 
@@ -37,9 +39,24 @@ public class RoleController {
     }
 
     @PostMapping(produces = "application/json")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @ApiOperation(value = "【角色添加】", notes = "name角色名称是必填项")
     public void save(@RequestBody Role entity)
     {
         roleService.insert(entity);
     }
+    @PutMapping(produces = "application/json")
+    @ApiOperation(value = "【角色修改】", notes = "name角色名称是必填项")
+    public void update(@RequestBody Role entity)
+    {
+        roleService.updateRole(entity);
+    }
+
+    @DeleteMapping("{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_GUEST')")
+    @ApiOperation(value = "【删除】",notes = "单个用户删除")
+    public void deleteById(@ApiParam(name = "id",value = "用户主键",required = true) @PathVariable("id") int id){
+        roleService.deleteById(id);
+    }
+
 }
