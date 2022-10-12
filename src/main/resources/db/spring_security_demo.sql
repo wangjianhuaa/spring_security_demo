@@ -124,4 +124,20 @@ CREATE TABLE `user_role`  (
 -- ----------------------------
 INSERT INTO `user_role` VALUES (1, 1, NULL, NULL, NULL, NULL, NULL);
 
+-- spring_security_demo.menu definition
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE `menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `auth_name` varchar(100) DEFAULT NULL,
+  `path` varchar(100) DEFAULT NULL COMMENT '路径',
+  `order` varchar(100) DEFAULT NULL COMMENT '排序',
+  `parent_id` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `create_by` varchar(100) DEFAULT NULL,
+  `created_time` datetime DEFAULT NULL,
+  `update_by` varchar(100) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 SET FOREIGN_KEY_CHECKS = 1;
