@@ -26,9 +26,9 @@ CREATE TABLE `authority`  (
   `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限名称',
   `code` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '权限编码',
   `revision` int(11) NULL DEFAULT NULL COMMENT '乐观锁',
-  `created_by` int(11) NULL DEFAULT NULL COMMENT '创建人',
+  `created_by` varchar(15) NULL DEFAULT NULL COMMENT '创建人',
   `created_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_by` int(11) NULL DEFAULT NULL COMMENT '更新人',
+  `updated_by` varchar(15) NULL DEFAULT NULL COMMENT '更新人',
   `updated_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '权限表' ROW_FORMAT = Dynamic;
@@ -46,11 +46,11 @@ DROP TABLE IF EXISTS `role`;
 CREATE TABLE `role`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `code` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色码',
-  `name` varchar(15)   NULL DEFAULT NULL COMMENT '角色名称',
+  `name` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '角色名称',
   `revision` int(11) NULL DEFAULT NULL COMMENT '乐观锁',
-  `created_by` int(11) NULL DEFAULT NULL COMMENT '创建人',
+  `created_by` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建人',
   `created_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `updated_by` int(11) NULL DEFAULT NULL COMMENT '更新人',
+  `updated_by` varchar(15) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
   `updated_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '角色表' ROW_FORMAT = Dynamic;
@@ -58,8 +58,10 @@ CREATE TABLE `role`  (
 -- ----------------------------
 -- Records of role
 -- ----------------------------
-INSERT INTO `role` VALUES (1, 'ROLE_GUEST','访客', NULL, NULL, NULL, NULL, NULL);
-INSERT INTO `role` VALUES (2, 'ROLE_ADMIN','管理员', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `role` VALUES (1, 'ROLE_GUEST', '访客', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `role` VALUES (2, 'ROLE_ADMIN', '管理员', NULL, NULL, NULL, NULL, NULL);
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 -- ----------------------------
 -- Table structure for role_authority
@@ -123,21 +125,28 @@ CREATE TABLE `user_role`  (
 -- Records of user_role
 -- ----------------------------
 INSERT INTO `user_role` VALUES (1, 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user_role` VALUES (1, 2, NULL, NULL, NULL, NULL, NULL);
 
--- spring_security_demo.menu definition
+-- ----------------------------
+-- Table structure for menu
+-- ----------------------------
 DROP TABLE IF EXISTS `menu`;
-CREATE TABLE `menu` (
+CREATE TABLE `menu`  (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `auth_name` varchar(100) DEFAULT NULL,
-  `path` varchar(100) DEFAULT NULL COMMENT '路径',
-  `order` varchar(100) DEFAULT NULL COMMENT '排序',
-  `parent_id` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
-  `create_by` varchar(100) DEFAULT NULL,
-  `created_time` datetime DEFAULT NULL,
-  `update_by` varchar(100) DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `path` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路径',
+  `parent_id` int(11) NULL DEFAULT NULL,
+  `status` int(11) NULL DEFAULT NULL,
+  `created_by` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `created_time` datetime(0) NULL DEFAULT NULL,
+  `updated_by` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `updated_time` datetime(0) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of menu
+-- ----------------------------
+INSERT INTO `menu` VALUES (2, 'super菜单', 'super', 0, 0, 'rain', '2022-10-17 21:34:05', 'rain', '2022-10-17 21:34:05');
 
 SET FOREIGN_KEY_CHECKS = 1;
