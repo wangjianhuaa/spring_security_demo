@@ -14,7 +14,7 @@ public class MenuVO {
     /**
      * 名字
      */
-    private String authName;
+    private String name;
 
     /**
      * 路径
@@ -34,6 +34,8 @@ public class MenuVO {
 
     private List<MenuVO> children;
 
+
+
     public int getId() {
         return id;
     }
@@ -42,12 +44,12 @@ public class MenuVO {
         this.id = id;
     }
 
-    public String getAuthName() {
-        return authName;
+    public String getName() {
+        return name;
     }
 
-    public void setAuthName(String authName) {
-        this.authName = authName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPath() {
@@ -82,19 +84,22 @@ public class MenuVO {
         this.children = children;
     }
 
-    public MenuVO(int id, String authName, String path, Integer order, int status, List<MenuVO> children) {
+    public MenuVO(int id, String name, String path, Integer order, int status, List<MenuVO> children) {
         this.id = id;
-        this.authName = authName;
+        this.name = name;
         this.path = path;
         this.order = order;
         this.status = status;
         this.children = children;
     }
 
+    public MenuVO() {
+    }
+
     @Override
     public String toString() {
         return "MenuVO{" +
-                "authName='" + authName + '\'' +
+                "name='" + name + '\'' +
                 ", path='" + path + '\'' +
                 ", order=" + order +
                 ", status=" + status +

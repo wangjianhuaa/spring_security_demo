@@ -147,6 +147,14 @@ CREATE TABLE `menu`  (
 -- ----------------------------
 -- Records of menu
 -- ----------------------------
-INSERT INTO `menu` VALUES (2, 'super菜单', 'super', 0, 0, 'rain', '2022-10-17 21:34:05', 'rain', '2022-10-17 21:34:05');
+INSERT INTO `menu` VALUES (0, 'super菜单', 'super', NULL, 0, 'rain', '2022-10-17 21:34:05', 'rain', '2022-10-17 21:34:05');
+INSERT INTO `menu` VALUES (1, '用户管理', 'users', 0, 0, 'rain', '2022-11-07 20:20:34', 'rain', '2022-11-07 20:20:41');
+INSERT INTO `menu` VALUES (2, '权限管理', 'roles', 0, 0, 'rain', '2022-11-07 20:21:59', 'rain', '2022-11-07 20:22:06');
+INSERT INTO `menu` VALUES (3, '菜单管理', 'menu', 0, 0, 'rain', '2022-11-07 20:22:01', 'rain', '2022-11-07 20:22:10');
+INSERT INTO `menu` VALUES (4, '其他', 'others', 0, 0, 'rain', '2022-11-07 20:22:03', 'rain', '2022-11-07 20:22:13');
+INSERT INTO `menu` VALUES (101, '用户列表', 'users', 1, 0, 'rain', '2022-11-07 20:23:54', 'rain', '2022-11-07 20:24:09');
+INSERT INTO `menu` VALUES (201, '角色列表', 'roles', 2, 0, 'rain', '2022-11-07 20:23:57', 'rain', '2022-11-07 20:24:15');
+INSERT INTO `menu` VALUES (202, '权限列表', 'auths', 2, 0, 'rain', '2022-11-07 20:24:00', 'rain', '2022-11-07 20:24:18');
+INSERT INTO `menu` VALUES (301, '菜单列表', 'menus', 3, 0, 'rain', '2022-11-07 20:24:03', 'rain', '2022-11-07 20:24:22');
 
 SET FOREIGN_KEY_CHECKS = 1;

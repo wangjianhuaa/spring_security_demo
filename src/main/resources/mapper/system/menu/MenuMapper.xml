@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.demo.modules.system.menu.mapper.MenuMapper">
+
+
+    <select id="selectListByParentId" resultType="com.wang.demo.modules.system.menu.entity.Menu">
+        SELECT id,name,path,parent_id,status,created_by,created_time,updated_by,updated_time FROM menu WHERE parent_id IS NOT NULL  and parent_id = #{id}
+    </select>
+
+
+</mapper>

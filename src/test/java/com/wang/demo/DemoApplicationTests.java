@@ -3,6 +3,7 @@ package com.wang.demo;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wang.demo.base.entity.BasePage;
+import com.wang.demo.modules.system.menu.service.MenuService;
 import com.wang.demo.modules.system.user.entity.User;
 import com.wang.demo.modules.system.user.service.UserService;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,14 @@ class DemoApplicationTests {
     @Test
     void testUser(){
         userService.findIdByUserName("rain");
+    }
+
+    @Autowired
+    private MenuService menuService;
+
+    @Test
+    void menuList(){
+        menuService.syncMenuTreeList();
     }
 
 }
