@@ -132,7 +132,7 @@ INSERT INTO `user_role` VALUES (1, 2, NULL, NULL, NULL, NULL, NULL);
 -- ----------------------------
 DROP TABLE IF EXISTS `menu`;
 CREATE TABLE `menu`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL ,
   `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `path` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '路径',
   `parent_id` int(11) NULL DEFAULT NULL,
