@@ -13,5 +13,17 @@ import java.util.List;
  */
 public interface MenuMapper extends BaseMapper<Menu> {
 
+    /**
+     * 通过父id查找子级菜单
+     * @param id id
+     * @return 集合
+     */
     List<Menu> selectListByParentId(String id);
+
+    /**
+     * 菜单新增
+     * @param menu 菜单
+     * @return 数量
+     */
+    int insertMenu(Menu menu);
 }

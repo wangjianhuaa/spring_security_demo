@@ -3,14 +3,12 @@ package com.wang.demo.modules.system.menu.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wang.demo.base.constants.MenuConstants;
 import com.wang.demo.base.entity.BasePage;
 import com.wang.demo.modules.system.menu.entity.Menu;
 import com.wang.demo.modules.system.menu.entity.MenuVO;
 import com.wang.demo.modules.system.menu.mapper.MenuMapper;
-import com.wang.demo.modules.system.role.entity.Role;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,7 +52,7 @@ public class MenuService extends ServiceImpl<MenuMapper, Menu> {
      */
     @Transactional(readOnly = false)
     public int insert(Menu menu){
-        return baseMapper.insert(menu);
+        return baseMapper.insertMenu(menu);
     }
     /**
      * 根据主键id删除菜单

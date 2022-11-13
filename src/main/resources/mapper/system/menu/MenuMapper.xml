@@ -8,5 +8,12 @@
         SELECT id,name,path,parent_id,status,created_by,created_time,updated_by,updated_time FROM menu WHERE parent_id IS NOT NULL  and parent_id = #{id}
     </select>
 
+    <insert id="insertMenu" parameterType="com.wang.demo.modules.system.menu.entity.Menu">
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            SELECT coalesce(max(id),0)+1 FROM menu
+        </selectKey>
+        INSERT INTO menu ( id, name, path, parent_id, status, created_by, created_time, updated_by, updated_time ) VALUES ( #{id}, #{name}, #{path}, #{parentId}, #{status}, #{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime} )
+    </insert>
+
 
 </mapper>
