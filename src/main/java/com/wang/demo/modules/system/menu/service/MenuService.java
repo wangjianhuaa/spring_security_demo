@@ -74,7 +74,7 @@ public class MenuService extends ServiceImpl<MenuMapper, Menu> {
 
     @Transactional(readOnly = false)
     public int updateMenu(Menu menu){
-        return baseMapper.updateById(menu);
+        return menuMapper.updateMenu(menu);
     }
 
     /**

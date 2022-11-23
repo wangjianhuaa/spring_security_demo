@@ -15,5 +15,10 @@
         INSERT INTO menu ( id, name, path, parent_id, status, created_by, created_time, updated_by, updated_time ) VALUES ( #{id}, #{name}, #{path}, #{parentId}, #{status}, #{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime} )
     </insert>
 
+    <update id="updateMenu" parameterType="com.wang.demo.modules.system.menu.entity.Menu">
+
+        update menu set   `name`=#{name},path=#{path},parent_id=#{parentId},updated_by=#{updatedBy}, updated_time= #{updatedTime} where id = #{id}
+    </update>
+
 
 </mapper>

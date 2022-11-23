@@ -26,4 +26,11 @@ public interface MenuMapper extends BaseMapper<Menu> {
      * @return 数量
      */
     int insertMenu(Menu menu);
+
+    /**
+     * 菜单修改
+     * @param menu
+     * @return
+     */
+    int updateMenu(Menu menu);
 }
