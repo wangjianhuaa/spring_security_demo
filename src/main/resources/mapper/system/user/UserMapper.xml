@@ -21,7 +21,12 @@
     <select id="findUserRolesByUserId" resultType="string" parameterType="int">
             select distinct r.code from user_role ur,role r where ur.role_id = r.id and ur.user_id= #{id}
     </select>
-    
+
+
+    <select id="findUserRoleListByUserId" resultType="role" parameterType="int">
+            select r.* from  role r inner join user_role ur on ur.role_id = r.id
+            where ur.user_id= #{id}
+    </select>
     <select id="findAuthorityCodeByUserId" parameterType="int" resultType="string">
             select a.code from user_role ur,role_authority ra,authority a
             where ur.role_id = ra.role_id and ra.authority_id = a.id and ur.user_id = #{id}

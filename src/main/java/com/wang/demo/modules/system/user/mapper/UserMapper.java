@@ -1,6 +1,7 @@
 package com.wang.demo.modules.system.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.wang.demo.modules.system.role.entity.Role;
 import com.wang.demo.modules.system.user.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -32,6 +33,13 @@ public interface UserMapper extends BaseMapper<User> {
      * @return 角色集合
      */
     List<String> findUserRolesByUserId(int id);
+
+    /**
+     * 根据用户id获取用户拥有的角色详情 用作前端构建role列表授权
+     * @param id id
+     * @return 集合
+     */
+    List<Role> findUserRoleListByUserId(int id);
 
     /**
      * 根据用户id获得授权码集合 用来判断是否有对应接口权限

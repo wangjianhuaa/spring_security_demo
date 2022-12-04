@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.wang.demo.base.entity.BasePage;
+import com.wang.demo.modules.system.role.entity.Role;
 import com.wang.demo.modules.system.user.entity.User;
 import com.wang.demo.modules.system.user.mapper.UserMapper;
 import org.springframework.beans.BeanUtils;
@@ -43,6 +44,8 @@ public class UserService extends ServiceImpl<UserMapper, User> {
         Page<User> userPage = baseMapper.selectPage(basePage.getPage(), queryWrapper);
         for (User user1 : userPage.getRecords()) {
             user1.setPass(null);
+            List<Role> userRoleListByUserId = baseMapper.findUserRoleListByUserId(user1.getId());
+            user1.setRoles(userRoleListByUserId);
         }
         return userPage;
 

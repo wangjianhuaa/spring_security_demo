@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.wang.demo.base.entity.Base;
+import com.wang.demo.modules.system.role.entity.Role;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,7 +44,7 @@ public class User extends Base {
      * roles可以通过自定义查询获得 且roles已添加到userDetails中 所以roles不必展示
      */
     @TableField(exist = false)
-    private List<String> roles;
+    private List<Role> roles;
 
     public String getNick() {
         return nick;
@@ -80,11 +81,11 @@ public class User extends Base {
         this.state = state;
     }
 
-    public List<String> getRoles() {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<String> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
