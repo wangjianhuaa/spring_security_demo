@@ -3,6 +3,7 @@ package com.wang.demo.modules.system.user.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.wang.demo.base.entity.BasePage;
+import com.wang.demo.modules.system.role.service.RoleService;
 import com.wang.demo.modules.system.user.entity.User;
 import com.wang.demo.modules.system.user.service.UserService;
 import io.swagger.annotations.*;
@@ -23,6 +24,9 @@ import springfox.documentation.annotations.ApiIgnore;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
 
     /**
      * @param page 基本分页条件
@@ -64,5 +68,13 @@ public class UserController {
     public void update(@Validated @RequestBody User user,@PathVariable("id") Integer id){
         //id没用 懒得改了
         userService.updateUser(user,id);
+    }
+
+    @GetMapping("roles")
+    public User allRoles(){
+        User user = new User();
+        user.setId(0);
+        user.setRoles(roleService.list());
+        return user;
     }
 }
