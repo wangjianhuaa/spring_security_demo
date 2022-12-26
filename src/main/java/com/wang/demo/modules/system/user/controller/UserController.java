@@ -73,7 +73,6 @@ public class UserController {
     @GetMapping("roles")
     public User allRoles(){
         User user = new User();
-        user.setId(0);
         user.setRoles(roleService.list());
         return user;
     }
