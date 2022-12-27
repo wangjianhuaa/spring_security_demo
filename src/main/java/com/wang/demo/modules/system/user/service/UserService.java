@@ -9,6 +9,7 @@ import com.wang.demo.base.entity.BasePage;
 import com.wang.demo.modules.system.role.entity.Role;
 import com.wang.demo.modules.system.user.entity.User;
 import com.wang.demo.modules.system.user.mapper.UserMapper;
+import com.wang.demo.modules.system.userRole.entity.UserRole;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -72,7 +75,18 @@ public class UserService extends ServiceImpl<UserMapper, User> {
             entity.setPass(bCryptPasswordEncoder.encode("123456"));
         }
         entity.setState(0);
-        return baseMapper.insert(entity);
+        baseMapper.saveUser(entity);
+        List<UserRole> userRoles = new ArrayList<>();
+        for (Role role : entity.getRoles()) {
+            UserRole userRole = new UserRole();
+            userRole.setUserId(entity.getId());
+            userRole.setRoleId(role.getId());
+            userRoles.add(userRole);
+        }
+        for (UserRole userRole : userRoles) {
+            baseMapper.insertUserRole(userRole);
+        }
+        return 0;
     }
     @Transactional(readOnly = false)
     public void updateUser(User entity,Integer id){

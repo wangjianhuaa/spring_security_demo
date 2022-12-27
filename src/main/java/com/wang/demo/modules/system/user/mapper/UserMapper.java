@@ -3,6 +3,7 @@ package com.wang.demo.modules.system.user.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.wang.demo.modules.system.role.entity.Role;
 import com.wang.demo.modules.system.user.entity.User;
+import com.wang.demo.modules.system.userRole.entity.UserRole;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -61,4 +62,18 @@ public interface UserMapper extends BaseMapper<User> {
      * @param user user
      */
     void updateUserById(User user);
+
+    /**
+     * 定制接口 将自增主键加入到对象并使用
+     * @param user user
+     * @return int
+     */
+    int saveUser(User user);
+
+    /**
+     * 用户权限中间表
+     * @param userRole userRole
+     * @return int
+     */
+    int insertUserRole(UserRole userRole);
 }

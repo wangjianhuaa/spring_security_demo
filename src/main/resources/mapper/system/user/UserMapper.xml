@@ -22,6 +22,11 @@
             select distinct r.code from user_role ur,role r where ur.role_id = r.id and ur.user_id= #{id}
     </select>
 
+    <insert id="insertUserRole" parameterType="com.wang.demo.modules.system.userRole.entity.UserRole">
+        INSERT INTO user_role ( user_id,role_id, created_by, created_time, updated_by, updated_time ) VALUES ( #{userId}, #{roleId}, #{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime} )
+
+    </insert>
+
 
     <select id="findUserRoleListByUserId" resultType="role" parameterType="int">
             select r.* from  role r inner join user_role ur on ur.role_id = r.id
@@ -35,6 +40,10 @@
     <select id="selectListByPage" resultType="com.wang.demo.modules.system.user.entity.User">
         select id ,nick ,name ,state from user limit #{start},#{end}
     </select>
+
+    <insert id="saveUser"   parameterType="com.wang.demo.modules.system.user.entity.User"  useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user ( id, nick, name, pass, state, created_by, created_time, updated_by, updated_time ) VALUES ( #{id}, #{nick}, #{name}, #{pass}, #{state}, #{createdBy}, #{createdTime}, #{updatedBy}, #{updatedTime} )
+    </insert>
 
 
 </mapper>
