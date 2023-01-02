@@ -95,6 +95,17 @@ public class UserService extends ServiceImpl<UserMapper, User> {
 //        if(StringUtils.hasText(entity.getName())){
 //            updateWrapper.eq("name",)
 //        }
+        List<UserRole> userRoles = new ArrayList<>();
+        for (Role role : entity.getRoles()) {
+            UserRole userRole = new UserRole();
+            userRole.setUserId(entity.getId());
+            userRole.setRoleId(role.getId());
+            userRoles.add(userRole);
+        }
+        baseMapper.deleteUserRole(entity.getId());
+        for (UserRole userRole : userRoles) {
+            baseMapper.insertUserRole(userRole);
+        }
          baseMapper.updateUserById(entity);
     }
 

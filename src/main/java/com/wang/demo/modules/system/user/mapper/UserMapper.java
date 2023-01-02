@@ -76,4 +76,11 @@ public interface UserMapper extends BaseMapper<User> {
      * @return int
      */
     int insertUserRole(UserRole userRole);
+
+    /**
+     * 删除用户权限中间表
+     * @param userId userId
+     * @return int
+     */
+    int deleteUserRole(int userId);
 }
