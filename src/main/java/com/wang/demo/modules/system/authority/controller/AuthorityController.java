@@ -26,11 +26,13 @@ public class AuthorityController {
             @ApiImplicitParam(name="current", value="页码（默认第1页）", dataType = "int", example = "1", paramType="body"),
             @ApiImplicitParam(name="size", value="每页条数（默认每页10条）", dataType = "int", example = "10", paramType="body")
     })
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_GUEST')")
     public IPage<Authority> get(@RequestBody BasePage<Authority> page){
         return authorityService.findByPage(page);
     }
 
     @GetMapping("{id}")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_GUEST')")
     @ApiOperation(value = "【主键查询】", notes = "主键ID必填信息")
     public Authority get(@ApiParam(name = "id", value = "角色主键", required = true, example = "1") @PathVariable int id)
     {

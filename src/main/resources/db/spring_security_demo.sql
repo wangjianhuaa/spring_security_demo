@@ -99,13 +99,14 @@ CREATE TABLE `user`  (
   `updated_by` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新人',
   `updated_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表 ' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户表 ' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (1, '小雨', 'rain', '$2a$10$aRVfyyUYjSHaMxty9lDYiOjOB3GxN/0TgdBta5vmNDPxT09sZl5CC', 0, 1, '1', '2021-03-18 18:08:16', '1', '2021-03-18 18:08:22');
-INSERT INTO `user` VALUES (2, '超管', 'admin', '$10$aRVfyyUYjSHaMxty9lDYiOjOB3GxN/0TgdBta5vmNDPxT09sZl5CC', 0, 1, '1', '2021-04-06 21:47:40', '1', '2021-04-13 21:47:44');
+INSERT INTO `user` VALUES (2, '超管', 'admin', '$2a$10$aRVfyyUYjSHaMxty9lDYiOjOB3GxN/0TgdBta5vmNDPxT09sZl5CC', 0, 1, '1', '2021-04-06 21:47:40', '1', '2021-04-13 21:47:44');
+INSERT INTO `user` VALUES (21, '访客用户', 'guest', '$2a$10$d3NGPQeKyvVpfi27jV5QjOvs.rAiAiYBFcdCHDwJhxi1YlrHQsQJe', 0, NULL, 'rain', '2023-02-01 19:48:45', 'rain', '2023-02-01 19:48:45');
 
 -- ----------------------------
 -- Table structure for user_role
@@ -126,6 +127,9 @@ CREATE TABLE `user_role`  (
 -- ----------------------------
 INSERT INTO `user_role` VALUES (1, 1, NULL, NULL, NULL, NULL, NULL);
 INSERT INTO `user_role` VALUES (1, 2, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user_role` VALUES (20, 1, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user_role` VALUES (20, 2, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `user_role` VALUES (21, 1, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for menu

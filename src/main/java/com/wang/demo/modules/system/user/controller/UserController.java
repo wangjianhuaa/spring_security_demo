@@ -33,7 +33,7 @@ public class UserController {
      * @return 分页结果
      */
     @PostMapping(produces = "application/json")
-    @PreAuthorize("hasAuthority('user:get')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_GUEST')")
     @ApiOperation(value = "【分页查询】", notes = "用户分页查询")
     public IPage<User> get(@RequestBody BasePage<User> page)
     {
@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    @PreAuthorize("hasAnyAuthority('user:get','testSecurity')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_GUEST')")
     @ApiOperation(value = "【主键查询】", notes = "主键ID必填信息")
     public User get(@ApiParam(name = "id", value = "用户主键", required = true, example = "1") @PathVariable int id)
     {
@@ -49,21 +49,21 @@ public class UserController {
     }
 
     @PutMapping
-    @PreAuthorize("hasRole('ROLE_GUEST')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "【新增】",notes = "用户新增")
     public void save(@Validated @RequestBody User user){
         userService.saveUser(user);
     }
 
     @DeleteMapping("{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_GUEST')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "【删除】",notes = "单个用户删除")
     public void deleteById(@ApiParam(name = "id",value = "用户主键",required = true) @PathVariable("id") int id){
         userService.deleteById(id);
     }
 
     @PutMapping("{id}")
-    @PreAuthorize("hasRole('ROLE_GUEST')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "【修改】",notes = "用户修改")
     public void update(@Validated @RequestBody User user,@PathVariable("id") Integer id){
         //id没用 懒得改了

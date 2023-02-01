@@ -27,25 +27,28 @@ public class RoleController {
             @ApiImplicitParam(name="current", value="页码（默认第1页）", dataType = "int", example = "1", paramType="body"),
             @ApiImplicitParam(name="size", value="每页条数（默认每页10条）", dataType = "int", example = "10", paramType="body")
     })
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_GUEST')")
     public IPage<Role> get(@RequestBody BasePage<Role> page){
         return roleService.findByPage(page);
     }
 
     @GetMapping("{id}")
     @ApiOperation(value = "【主键查询】", notes = "主键ID必填信息")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_GUEST')")
     public Role get(@ApiParam(name = "id", value = "角色主键", required = true, example = "1") @PathVariable int id)
     {
         return roleService.findById(id);
     }
 
     @PostMapping(produces = "application/json")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "【角色添加】", notes = "name角色名称是必填项")
     public void save(@RequestBody Role entity)
     {
         roleService.insert(entity);
     }
     @PutMapping(produces = "application/json")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "【角色修改】", notes = "name角色名称是必填项")
     public void update(@RequestBody Role entity)
     {
@@ -53,7 +56,7 @@ public class RoleController {
     }
 
     @DeleteMapping("{id}")
-    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_GUEST')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ApiOperation(value = "【删除】",notes = "单个用户删除")
     public void deleteById(@ApiParam(name = "id",value = "用户主键",required = true) @PathVariable("id") int id){
         roleService.deleteById(id);

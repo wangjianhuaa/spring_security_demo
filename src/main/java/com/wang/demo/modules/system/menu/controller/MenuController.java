@@ -28,6 +28,7 @@ public class MenuController {
     private MenuService menuService;
 
     @GetMapping("getMenuList")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_GUEST')")
     @ApiOperation(value = "查询",notes = "菜单查询")
     public List<MenuVO> getMenuIndex(){
         //后端构建菜单树
@@ -60,6 +61,7 @@ public class MenuController {
     }
     @PutMapping(produces = "application/json")
     @ApiOperation(value = "【菜单修改】", notes = "name权限名称是必填项")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public void update(@RequestBody Menu entity)
     {
         menuService.updateMenu(entity);
